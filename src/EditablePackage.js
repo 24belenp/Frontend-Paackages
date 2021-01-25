@@ -6,8 +6,8 @@ import EditPackage from './EditPackage.js';
 function EditablePackage(props) {
     const[isEditing, setIsEditing] = useState(false);
 
-    function savePackage(package) {
-        const result = props.onEdit(package);
+    function savePackage(paackage) {
+        const result = props.onEdit(paackage);
         if(result){
             setIsEditing(false);
         }
