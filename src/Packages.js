@@ -29,8 +29,8 @@ function Packages(props) {
         setMessage(null);
     };
 
-    function validatePackageCode(package) {
-        if(package.code === ''){
+    function validatePackageCode(paackage) {
+        if(paackage.code === ''){
             setMessage('A code must be provided');
             return false;
         }
@@ -63,15 +63,26 @@ function Packages(props) {
        
     }
 
-    function onAddPackage(package) { 
+    function onPackageDelete(paackage) {
+        PackagesAPI.deleteById(paackage.code).then(res =>{
+           setPackages((prevPackages) => {
+               return prevPackages.filter((c) => c.name !== paackage.name)
+        })
+    });
+          
+    }
 
-        const validation = validatePackageCode(package);
+
+
+    function onAddPackage(paackage) { 
+
+        const validation = validatePackageCode(paackage);
         if(! validation) {
             return false;
         }else {
             async function addPackage() {
                 try {
-                     const response = await PackagesAPI.postPackage(package);
+                     const response = await PackagesAPI.postPackage(paackage);
                 } catch(error) {
                     setMessage('An unexpected error happened');
                 }
@@ -82,8 +93,8 @@ function Packages(props) {
 
 
         setPackages((prevPackages) => {
-            if(! prevPackages.find(c => c.code === package.code)){
-             return [...prevPackages, package]
+            if(! prevPackages.find(c => c.code === paackage.code)){
+             return [...prevPackages, paackage]
             } else {
                 setMessage('Duplicate code')
                 return prevPackages;
@@ -108,8 +119,8 @@ function Packages(props) {
                 </thead>
                 <tbody>
                     <NewPackage onAddPackage={onAddPackage}/>
-                    {packages.map((package) => 
-                        <EditablePackage key={package.code} package={package} onEdit={(newPackage) => onPackageEdit(newPackage, package)} onDelete={onPackageDelete}/>
+                    {packages.map((paackage) => 
+                        <EditablePackage key={paackage.code} package={paackage} onEdit={(newPackage) => onPackageEdit(newPackage, paackage)} onDelete={onPackageDelete}/>
                     )}
                 </tbody>
             </table>
