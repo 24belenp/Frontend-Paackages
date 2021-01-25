@@ -5,7 +5,7 @@ function Package(props) {
             <td>{props.package.code}</td>
             <td>{props.package.quantity}</td>
             <td>{props.package.delivery_date}</td>
-            <td>{props.package.status}</td>
+            <td>{props.package.statuss}</td>
             <td>
                 <button className="btn btn-primary" onClick={() => props.onEdit(props.package)}>Edit</button>
                 <button className="btn btn-primary" onClick={() => props.onDelete(props.package)}>Delete</button>
